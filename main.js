@@ -21,16 +21,20 @@ newExpressionsArr.forEach(function(item) {
   console.log(item + ' is ' + item.search(expressionsExp));
 });
 
-function createURL(country, region) {
-  var regExpCountry = /\{country\}/;
-  var regExpRegion = /\{region\}/;
-  var url = country.replace(regExpCountry, region.country);
-  url = url.replace(regExpRegion, region.region);
-  console.log(url);
-  console.log(url === '/api/countries/Ukraine/regions/Kiev/');
+function createURL(templateURL, params) {
+  var res = templateURL;
+
+  for (var key in params) {
+    var regExp = new RegExp('{' + key + '}');    
+    res = res.replace(regExp, params[key]);
+  }
+  
+  return res;
 }
 
 let url = createURL(`/api/countries/{country}/regions/{region}/`, {
   country: `Ukraine`,
   region: `Kiev`
 });
+console.log(url);
+console.log(url === '/api/countries/Ukraine/regions/Kiev/');
