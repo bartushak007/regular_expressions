@@ -13,14 +13,15 @@ console.log('time 24:01' + ' is ' + str3.match(timeExp));
 console.log('time 37:98' + ' is ' + str4.match(timeExp));
 console.log('time 00:00' + ' is ' + str6.match(timeExp));
 
-var expressions = '1+ 2, -11.2222* 2223.455555, -3 / -6,, -3 +/ -6, -2 - 2, -1.2 * 3.4, 1#w+ 2d, ff  11  +   44',
-  expressionsExp = /(-?\d*[.]?\d)\s*[+-\/*]\s*(-?\d*[.]?\d)/;
+var expressions = '1+ 2, -11.2222* 2223.455555, -3 / -6,, -3 +/ -6, -2 - 2, -1.2 * 3.4, 1#w+ 2d, ff  11  +   44, -11 * 34.47, -11.43 * 34.47',
+  expressionsExp = /((-?\d*[.]?\d+)\s*([+-\/*])\s*(-?\d*[.]?\d+))/;
 
 var newExpressionsArr = expressions.split(', ');
 newExpressionsArr.forEach(function(item) {
   var res = item.search(expressionsExp),
   dataInf = 'is not';
-
+  console.log(expressionsExp.exec(item));
+  
   if (res >= 0) {
     dataInf = 'is';
   }
